@@ -2,6 +2,7 @@ package com.maxim.tennisscoreboard.util;
 
 import com.maxim.tennisscoreboard.models.Player;
 import lombok.Getter;
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -23,6 +24,12 @@ public class HibernateSessionFactoryUtil {
     }
 
     public static void shutdown() {
-        getSessionFactory().close();
+        if (sessionFactory != null) {
+            try {
+                sessionFactory.close();
+            } catch (HibernateException ignored) {
+                ignored.printStackTrace();
+            }
+        }
     }
 }
