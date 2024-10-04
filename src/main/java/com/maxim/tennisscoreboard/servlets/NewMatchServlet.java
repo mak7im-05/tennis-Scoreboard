@@ -30,7 +30,9 @@ public class NewMatchServlet extends HttpServlet {
         Player p1 = new Player();
         p1.setName(firstName);
 
-        playerDao.addPlayer(p1);
+        playerDao.savePlayer(p1);
+        Player p2 = playerDao.findByName(firstName);
+        System.out.println(p2);
         response.setStatus(200);
     }
 }
