@@ -1,22 +1,23 @@
 package com.maxim.tennisscoreboard.servlets;
 
 import com.maxim.tennisscoreboard.dao.PlayerDao;
-import com.maxim.tennisscoreboard.models.Match;
 import com.maxim.tennisscoreboard.models.Player;
+import com.maxim.tennisscoreboard.service.MatchGeneratorService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.h2.expression.function.table.CSVReadFunction;
 
 import java.io.IOException;
 
 @WebServlet(name = "NewMatchServlet", urlPatterns = "/new-match")
 public class NewMatchServlet extends HttpServlet {
     private final PlayerDao playerDao;
+    private final MatchGeneratorService matchGeneratorService;
 
     public NewMatchServlet() {
+        this.matchGeneratorService = new MatchGeneratorService();
         this.playerDao = new PlayerDao();
     }
 
@@ -57,11 +58,9 @@ public class NewMatchServlet extends HttpServlet {
             secondPlayer = playerDao.findByName(secondPlayerName);
         }
 
-        Match match = new Match();
-        match.setPlayer1(firstPlayer.getId());
-        match.setPlayer2(secondPlayer.getId());
+        String generatedUUID = matchGeneratorService.generateMatch(firstPlayer, secondPlayer);
 
-        request.getRequestDispatcher("/match-score?uuid=$match_id").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/new-match?uuid=" + generatedUUID);
     }
 
     private boolean isInvalidParameters(String firstPlayerName, String secondPlayerName) {
