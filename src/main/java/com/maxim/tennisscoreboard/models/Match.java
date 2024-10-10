@@ -1,15 +1,9 @@
 package com.maxim.tennisscoreboard.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity
 @Table(name = "Matches")
 public class Match {
@@ -17,10 +11,25 @@ public class Match {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "player1")
-    private int player1;
-    @Column(name = "player2")
-    private int player2;
-    @Column(name = "winner")
-    private int winner;
+    @ManyToOne
+    private Player player1;
+
+    @ManyToOne
+    private Player player2;
+
+    @ManyToOne
+    private Player winner;
+
+    @Transient
+    private Score score = new Score();
+
+    public void setPlayer1(Player player) {
+        this.player1 = player;
+        score.initPlayer();
+    }
+
+    public void setPlayer2(Player player) {
+        this.player2 = player;
+        score.initPlayer();
+    }
 }

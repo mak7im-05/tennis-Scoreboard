@@ -59,8 +59,8 @@ public class NewMatchServlet extends HttpServlet {
         }
 
         String generatedUUID = matchGeneratorService.generateMatch(firstPlayer, secondPlayer);
-
-        response.sendRedirect(request.getContextPath() + "/new-match?uuid=" + generatedUUID);
+        String redirect = String.format("match-score?uuid=%s",generatedUUID);
+        response.sendRedirect(redirect);
     }
 
     private boolean isInvalidParameters(String firstPlayerName, String secondPlayerName) {

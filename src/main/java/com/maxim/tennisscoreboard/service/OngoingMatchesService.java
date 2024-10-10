@@ -8,7 +8,6 @@ import java.util.UUID;
 public class OngoingMatchesService {
     private static final HashMap<String, Match> ongoingMatches = new HashMap<>();
 
-
     public static String put(Match newMatch) {
         String uuid = UUID.randomUUID().toString();
         while (ongoingMatches.containsKey(uuid)) {
@@ -17,5 +16,9 @@ public class OngoingMatchesService {
         ongoingMatches.put(uuid, newMatch);
 
         return uuid;
+    }
+
+    public static Match get(String uuid) {
+        return ongoingMatches.get(uuid);
     }
 }

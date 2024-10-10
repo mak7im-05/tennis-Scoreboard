@@ -3,11 +3,7 @@ package com.maxim.tennisscoreboard.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Data
 @Entity
 @Table(name = "Players")
 public class Player {
