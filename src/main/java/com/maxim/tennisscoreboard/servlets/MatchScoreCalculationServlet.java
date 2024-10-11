@@ -38,7 +38,7 @@ public class MatchScoreCalculationServlet extends HttpServlet {
         int winPlayer = Integer.parseInt(request.getParameter("winPlayer"));
         int losePlayer = Integer.parseInt(request.getParameter("losePlayer"));
         Match match = OngoingMatchesService.get(uuid);
-        match.getScore().winPointsPlayer(winPlayer, losePlayer);
+        match.getScore().winPlayerPoints(winPlayer, losePlayer);
     }
 
 }

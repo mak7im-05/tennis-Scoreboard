@@ -13,25 +13,32 @@ public class Score {
         playerScore.put(playerNumber++, put);
     }
 
-    public void winPointsPlayer(int winPlayerNumber, int losePlayerNumber) {
+    public void winPlayerPoints(int winPlayerNumber, int losePlayerNumber) {
         int winPlayerPoints = playerScore.get(winPlayerNumber).getFirst();
         int losePlayerPoints = playerScore.get(losePlayerNumber).getFirst();
 
         if (!isEnd) {
-            if (winPlayerNumber < 30) {
+            if (playerScore.get(winPlayerNumber).get(1).equals(playerScore.get(losePlayerNumber).get(1)) && playerScore.get(winPlayerNumber).get(1) == 6) {
+                if(winPlayerPoints == 6) {
+                    winPlayerGame(winPlayerNumber, losePlayerNumber);
+                } else {
+                    winPlayerPoints++;
+                    playerScore.get(winPlayerNumber).set(0, winPlayerPoints);
+                }
+            } else if (winPlayerPoints < 30) {
                 winPlayerPoints += 15;
                 playerScore.get(winPlayerNumber).set(0, winPlayerPoints);
-            } else if (winPlayerNumber == 30) {
+            } else if (winPlayerPoints == 30) {
                 winPlayerPoints += 10;
                 playerScore.get(winPlayerNumber).set(0, winPlayerPoints);
             } else {
                 if (winPlayerPoints != losePlayerPoints) {
-                    winPlayerGame(winPlayerNumber, losePlayerNumber, winPlayerPoints, losePlayerPoints);
+                    winPlayerGame(winPlayerNumber, losePlayerNumber);
                 } else {
                     int winExtraPoint = playerScore.get(winPlayerNumber).getLast();
                     int loseExtraPoint = playerScore.get(losePlayerNumber).getLast();
                     if (winExtraPoint == loseExtraPoint + 1) {
-                        winPlayerGame(winPlayerNumber, losePlayerNumber, winPlayerPoints, losePlayerPoints);
+                        winPlayerGame(winPlayerNumber, losePlayerNumber);
                     } else {
                         winExtraPoint += 1;
                         playerScore.get(winPlayerNumber).set(3, winExtraPoint);
@@ -41,7 +48,7 @@ public class Score {
         }
     }
 
-    private void winPlayerGame(int winPlayerNumber, int losePlayerNumber, int winPlayerPoints, int losePlayerPoints) {
+    private void winPlayerGame(int winPlayerNumber, int losePlayerNumber) {
         int winPlayerGame = playerScore.get(winPlayerNumber).get(1);
         int losePlayerGame = playerScore.get(losePlayerNumber).get(1);
 
@@ -49,8 +56,11 @@ public class Score {
             winPlayerGame++;
             playerScore.get(winPlayerNumber).set(1, winPlayerGame);
         } else {
-            if (winPlayerGame == losePlayerGame + 1) {
+            if (winPlayerGame == 5 && losePlayerGame < 5) {
                 winPlayerSet(winPlayerNumber);
+            } else if(winPlayerGame == 5 && losePlayerGame == 6) {
+                winPlayerGame++;
+                playerScore.get(winPlayerNumber).set(1, winPlayerGame);
             } else {
                 winPlayerGame++;
                 playerScore.get(winPlayerNumber).set(1, winPlayerGame);
@@ -62,7 +72,7 @@ public class Score {
     private void winPlayerSet(int winPlayerNumber) {
         int winPlayerSet = playerScore.get(winPlayerNumber).get(2);
 
-        if (winPlayerSet == 1) {
+        if (winPlayerSet != 1) {
             winPlayerSet++;
             playerScore.get(winPlayerNumber).set(2, winPlayerSet);
         } else {
@@ -97,6 +107,10 @@ public class Score {
 
     public int getPlayerSets(int playerNumber) {
         return playerScore.get(playerNumber).get(2);
+    }
+
+    public boolean isEnd() {
+        return isEnd;
     }
 
 
