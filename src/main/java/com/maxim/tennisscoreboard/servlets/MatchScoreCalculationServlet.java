@@ -27,7 +27,7 @@ public class MatchScoreCalculationServlet extends HttpServlet {
             response.sendError(400,"No match with this uuid");
             return;
         }
-
+        
         matchScoreController.handleGet(request, uuid);
         request.getRequestDispatcher("match-score.jsp").forward(request,response);
     }

@@ -4,6 +4,13 @@
     margin: 0;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
 .container {
     width: 100%;
     max-width: 900px;
@@ -51,7 +58,7 @@
     outline: none;
 }
 
-.btn {
+.btn-start {
     width: 100%;
     background-color: #4CAF50;
     color: white;
@@ -76,4 +83,63 @@
 .btn:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
+}
+
+/* table */
+
+.tennis_table-score {
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tennis_table-score caption {
+    font-size: 1.5em;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.tennis_table-score th, 
+.tennis_table-score td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.tennis_table-score th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.tennis_table-score tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.tennis_table-score tr:hover {
+    background-color: #ddd;
+}
+
+.btn-container {
+    text-align: center;
+    margin-top: 20px; 
+}
+
+.btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
 }

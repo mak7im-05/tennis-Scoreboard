@@ -16,7 +16,7 @@
               required>
             <input type="text" class="player_name_input" name="player2" id="player2" placeholder="Имя первого игрока"
               required>
-            <input type="submit" value="Начать" class="btn">
+            <input type="submit" value="Начать" class="btn-start">
           </div>
         </form>
       </div>
