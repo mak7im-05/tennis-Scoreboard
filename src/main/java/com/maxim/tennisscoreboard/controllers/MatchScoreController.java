@@ -15,13 +15,28 @@ public class MatchScoreController {
         request.setAttribute("uuid", uuid);
 
         request.setAttribute("firstPlayerName", firstPlayerName);
-        request.setAttribute("firstPlayerPoints", match.getScore().getPlayerPoints(1));
         request.setAttribute("firstPlayerGames", match.getScore().getPlayerGames(1));
         request.setAttribute("firstPlayerSets", match.getScore().getPlayerSets(1));
 
         request.setAttribute("secondPlayerName", secondPlayerName);
-        request.setAttribute("secondPlayerPoints", match.getScore().getPlayerPoints(2));
         request.setAttribute("secondPlayerGames", match.getScore().getPlayerGames(2));
         request.setAttribute("secondPlayerSets", match.getScore().getPlayerSets(2));
+
+        if(match.getScore().getPlayerPoints(1) == match.getScore().getPlayerPoints(2) && match.getScore().getPlayerPoints(1) == 40) {
+            if(match.getScore().getPlayerExtraPoints(1) - match.getScore().getPlayerExtraPoints(2) == 1) {
+                request.setAttribute("firstPlayerPoints", "Больше");
+                request.setAttribute("secondPlayerPoints", "Меньше");
+            } else if(match.getScore().getPlayerExtraPoints(1) - match.getScore().getPlayerExtraPoints(2) == -1) {
+                request.setAttribute("firstPlayerPoints", "Меньше");
+                request.setAttribute("secondPlayerPoints", "Больше");
+            } else {
+                request.setAttribute("firstPlayerPoints", "Ровно");
+                request.setAttribute("secondPlayerPoints", "Ровно");
+            }
+        } else {
+            request.setAttribute("firstPlayerPoints", match.getScore().getPlayerPoints(1));
+            request.setAttribute("secondPlayerPoints", match.getScore().getPlayerPoints(2));
+
+        }
     }
 }

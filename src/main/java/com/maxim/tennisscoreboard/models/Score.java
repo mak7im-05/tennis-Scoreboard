@@ -52,31 +52,24 @@ public class Score {
         int winPlayerGame = playerScore.get(winPlayerNumber).get(1);
         int losePlayerGame = playerScore.get(losePlayerNumber).get(1);
 
-        if (winPlayerGame < 5) {
+        if(winPlayerGame >= 5 && Math.abs(winPlayerGame + 1 - losePlayerGame) > 1) {
+            winPlayerSet(winPlayerNumber);
+        } else {
             winPlayerGame++;
             playerScore.get(winPlayerNumber).set(1, winPlayerGame);
-        } else {
-            if (winPlayerGame == 5 && losePlayerGame < 5) {
-                winPlayerSet(winPlayerNumber);
-            } else if(winPlayerGame == 5 && losePlayerGame == 6) {
-                winPlayerGame++;
-                playerScore.get(winPlayerNumber).set(1, winPlayerGame);
-            } else {
-                winPlayerGame++;
-                playerScore.get(winPlayerNumber).set(1, winPlayerGame);
-            }
         }
         clearScore();
     }
 
     private void winPlayerSet(int winPlayerNumber) {
         int winPlayerSet = playerScore.get(winPlayerNumber).get(2);
-
-        if (winPlayerSet != 1) {
+        if (winPlayerSet == 1) {
             winPlayerSet++;
             playerScore.get(winPlayerNumber).set(2, winPlayerSet);
-        } else {
             winMatch();
+        } else {
+            winPlayerSet++;
+            playerScore.get(winPlayerNumber).set(2, winPlayerSet);
         }
         clearMatch();
     }
@@ -114,4 +107,16 @@ public class Score {
     }
 
 
+    public int getPlayerExtraPoints(int playerId) {
+        return playerScore.get(playerId).get(3);
+    }
 }
+//if (winPlayerGame == 5 && losePlayerGame < 5) {
+//winPlayerSet(winPlayerNumber);
+//            } else if(winPlayerGame == 5 && losePlayerGame == 6) {
+//winPlayerGame++;
+//        playerScore.get(winPlayerNumber).set(1, winPlayerGame);
+//            } else {
+//winPlayerGame++;
+//        playerScore.get(winPlayerNumber).set(1, winPlayerGame);
+//            }

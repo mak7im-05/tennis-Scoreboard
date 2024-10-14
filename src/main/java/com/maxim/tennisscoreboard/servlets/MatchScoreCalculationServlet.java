@@ -27,7 +27,7 @@ public class MatchScoreCalculationServlet extends HttpServlet {
             response.sendError(400,"No match with this uuid");
             return;
         }
-        
+
         matchScoreController.handleGet(request, uuid);
         request.getRequestDispatcher("match-score.jsp").forward(request,response);
     }
@@ -35,10 +35,20 @@ public class MatchScoreCalculationServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uuid = request.getParameter("uuid");
-        int winPlayer = Integer.parseInt(request.getParameter("winPlayer"));
-        int losePlayer = Integer.parseInt(request.getParameter("losePlayer"));
+        int playerNameId = Integer.parseInt(request.getParameter("playerNameID"));
+
         Match match = OngoingMatchesService.get(uuid);
-        match.getScore().winPlayerPoints(winPlayer, losePlayer);
+        if(match == null) {
+            response.sendError(400,"No match with this uuid");
+            return;
+        }
+        if(playerNameId == 1) {
+            match.getScore().winPlayerPoints(1, 2);
+        } else {
+            match.getScore().winPlayerPoints(2, 1);
+        }
+        String redirect = String.format("match-score?uuid=%s",uuid);
+        response.sendRedirect(redirect);
     }
 
 }

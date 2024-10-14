@@ -27,26 +27,26 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= request.getParameter("firstPlayerName") %></td>
-        <td><%= request.getParameter("firstPlayerPoints") %></td>
-        <td><%= request.getParameter("firstPlayerGames") %></td>
-        <td><%= request.getParameter("firstPlayerSets") %></td>
+        <td>${firstPlayerName}</td>
+        <td>${firstPlayerPoints}</td>
+        <td>${firstPlayerGames}</td>
+        <td>${firstPlayerSets}</td>
       </tr>
       <tr>
-        <td><%= request.getParameter("secondPlayerName") %></td>
-        <td><%= request.getParameter("secondPlayerPoints") %></td>
-        <td><%= request.getParameter("secondPlayerGames") %></td>
-        <td><%= request.getParameter("secondPlayerSets") %></td>
+        <td>${secondPlayerName}</td>
+        <td>${secondPlayerPoints}</td>
+        <td>${secondPlayerGames}</td>
+        <td>${secondPlayerSets}</td>
       </tr>
     </tbody>
   </table>
-  <div class="btn-container">
-    <button class="btn">
+  <form action="match-score?uuid=${uuid}" class="btn-container" method="post">
+    <button class="btn" name="playerNameID" value="1">
       победил игрок 1
     </button>
-    <button class="btn">
+    <button class="btn" name="playerNameID"  value="2">
       победил игрок 2
     </button> 
-  </div>
+  </form>
 </body>
 </html>
