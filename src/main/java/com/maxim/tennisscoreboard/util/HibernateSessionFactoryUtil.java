@@ -1,5 +1,6 @@
 package com.maxim.tennisscoreboard.util;
 
+import com.maxim.tennisscoreboard.models.Match;
 import com.maxim.tennisscoreboard.models.Player;
 import lombok.Getter;
 import org.hibernate.HibernateException;
@@ -14,7 +15,7 @@ public class HibernateSessionFactoryUtil {
         try {
             return new Configuration()
                     .addAnnotatedClass(Player.class)
-                    .addAnnotatedClass(Math.class)
+                    .addAnnotatedClass(Match.class)
                     .configure()
                     .buildSessionFactory();
         } catch (Throwable ex) {

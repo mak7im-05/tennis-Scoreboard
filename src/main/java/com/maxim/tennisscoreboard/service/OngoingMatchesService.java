@@ -21,4 +21,8 @@ public class OngoingMatchesService {
     public static Match get(String uuid) {
         return ongoingMatches.get(uuid);
     }
+
+    public static void delete(String uuid) {
+        ongoingMatches.remove(uuid);
+    }
 }

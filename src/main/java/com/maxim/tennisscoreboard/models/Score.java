@@ -5,7 +5,7 @@ import java.util.*;
 public class Score {
     private final HashMap<Integer, List<Integer>> playerScore = new HashMap<>();
     private int playerNumber = 1;
-    boolean isEnd;
+    private boolean isEnd;
 
     public void initPlayer() {
         List<Integer> put = new ArrayList<>();
@@ -66,7 +66,7 @@ public class Score {
         if (winPlayerSet == 1) {
             winPlayerSet++;
             playerScore.get(winPlayerNumber).set(2, winPlayerSet);
-            winMatch();
+            winMatch(winPlayerNumber);
         } else {
             winPlayerSet++;
             playerScore.get(winPlayerNumber).set(2, winPlayerSet);
@@ -74,7 +74,7 @@ public class Score {
         clearMatch();
     }
 
-    private void winMatch() {
+    private void winMatch(int winPlayerNumber) {
         isEnd = true;
     }
 
@@ -111,12 +111,3 @@ public class Score {
         return playerScore.get(playerId).get(3);
     }
 }
-//if (winPlayerGame == 5 && losePlayerGame < 5) {
-//winPlayerSet(winPlayerNumber);
-//            } else if(winPlayerGame == 5 && losePlayerGame == 6) {
-//winPlayerGame++;
-//        playerScore.get(winPlayerNumber).set(1, winPlayerGame);
-//            } else {
-//winPlayerGame++;
-//        playerScore.get(winPlayerNumber).set(1, winPlayerGame);
-//            }
