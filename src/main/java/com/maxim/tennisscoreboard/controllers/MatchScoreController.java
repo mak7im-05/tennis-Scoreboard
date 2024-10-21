@@ -10,6 +10,9 @@ public class MatchScoreController {
 
     public void handleGet(HttpServletRequest request, String uuid) {
         Match match = OngoingMatchesService.get(uuid);
+        if(match == null) {
+            return;
+        }
 
         String firstPlayerName = match.getPlayer1().getName();
         String secondPlayerName = match.getPlayer2().getName();
@@ -41,6 +44,7 @@ public class MatchScoreController {
             request.setAttribute("firstPlayerPoints", match.getScore().getPlayerPoints(1));
             request.setAttribute("secondPlayerPoints", match.getScore().getPlayerPoints(2));
         }
+
         if (match.getScore().isEnd() && firstPlayerSets > secondPlayerSets) {
             match.setWinner(match.getPlayer1());
             request.setAttribute("winner", firstPlayerName);
@@ -55,6 +59,9 @@ public class MatchScoreController {
 
     public void handlePost(String uuid, int playerNameId) {
         Match match = OngoingMatchesService.get(uuid);
+        if(match == null) {
+            return;
+        }
         MatchScoreCalculationService.winPoints(match, playerNameId);
     }
 }

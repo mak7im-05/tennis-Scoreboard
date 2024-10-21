@@ -66,7 +66,7 @@ public class Score {
         if (winPlayerSet == 1) {
             winPlayerSet++;
             playerScore.get(winPlayerNumber).set(2, winPlayerSet);
-            winMatch(winPlayerNumber);
+            winMatch();
         } else {
             winPlayerSet++;
             playerScore.get(winPlayerNumber).set(2, winPlayerSet);
@@ -74,7 +74,7 @@ public class Score {
         clearMatch();
     }
 
-    private void winMatch(int winPlayerNumber) {
+    private void winMatch() {
         isEnd = true;
     }
 

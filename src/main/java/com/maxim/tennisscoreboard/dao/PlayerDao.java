@@ -2,6 +2,7 @@ package com.maxim.tennisscoreboard.dao;
 
 import com.maxim.tennisscoreboard.models.Player;
 import com.maxim.tennisscoreboard.util.HibernateSessionFactoryUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -13,7 +14,9 @@ public class PlayerDao {
             Transaction tx1 = session.beginTransaction();
             session.persist(player);
             tx1.commit();
-        } // exc
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
     }
 
     public Player findByName(String name) {
@@ -22,9 +25,10 @@ public class PlayerDao {
             List<Player> playerList = session.createQuery(hql).setParameter("name", name).getResultList();
             if (!playerList.isEmpty()) {
                 return playerList.getFirst();
-            } else {
-                return null;
             }
+        } catch (HibernateException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 }
