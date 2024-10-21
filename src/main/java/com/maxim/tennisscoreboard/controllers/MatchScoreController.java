@@ -3,7 +3,7 @@ package com.maxim.tennisscoreboard.controllers;
 import com.maxim.tennisscoreboard.models.Match;
 import com.maxim.tennisscoreboard.service.MatchScoreCalculationService;
 import com.maxim.tennisscoreboard.service.OngoingMatchesService;
-import com.maxim.tennisscoreboard.servlets.FinishedMatchesPersistenceService;
+import com.maxim.tennisscoreboard.service.FinishedMatchesPersistenceService;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class MatchScoreController {
@@ -49,6 +49,7 @@ public class MatchScoreController {
         if (match.getScore().isEnd() && firstPlayerSets < secondPlayerSets) {
             match.setWinner(match.getPlayer2());
             request.setAttribute("winner", secondPlayerName);
+            FinishedMatchesPersistenceService.save(match, uuid);
         }
     }
 

@@ -36,10 +36,12 @@
     <tr>
         <td>${secondPlayerName}</td>
         <td>${secondPlayerPoints}</td>
-        <td>${secondPlayerGames}</td>
+        <td>${secondPlayerGames}</td>-
         <td>${secondPlayerSets}</td>
     </tr>
     </tbody>
 </table>
+<a href="index.jsp">На главную</a>
+
 </body>
 </html>

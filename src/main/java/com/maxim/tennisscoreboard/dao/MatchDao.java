@@ -1,7 +1,6 @@
 package com.maxim.tennisscoreboard.dao;
 
 import com.maxim.tennisscoreboard.models.Match;
-import com.maxim.tennisscoreboard.models.Player;
 import com.maxim.tennisscoreboard.util.HibernateSessionFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -17,11 +16,21 @@ public class MatchDao {
         }
     }
 
-    public List<Match> findByName(String name) {
+    public List<Match> getMatchesByName(String name) {
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             String hql = "From Match where player1.name=:name or player2.name=:name";
             List<Match> playerList = session.createQuery(hql).setParameter("name", name).getResultList();
             return playerList;
         }
     }
+
+    public List<Match> getMatches() {
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
+            String hql = "From Match";
+            List<Match> playerList = session.createQuery(hql).getResultList();
+            return playerList;
+        }
+    }
+
+
 }
